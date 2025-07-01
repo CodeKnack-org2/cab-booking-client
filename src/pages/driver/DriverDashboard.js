@@ -35,7 +35,7 @@ import {
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
-import api from '../../services/api';
+import {acceptBooking, startTrip, completeTrip, cancelBooking, toggleAvailability, getCurrentTrip, getDriverEarnings, getDriverBookings} from '../../services/api';
 
 const DriverDashboard = () => {
   const { user } = useAuth();
@@ -53,9 +53,9 @@ const DriverDashboard = () => {
   const fetchDriverData = async () => {
     try {
       const [bookingsRes, currentTripRes, earningsRes] = await Promise.all([
-        api.getDriverBookings(),
-        api.getCurrentTrip(user.id),
-        api.getDriverEarnings(user.id),
+        getDriverBookings(),
+        getCurrentTrip(user.id),
+        getDriverEarnings(user.id),
       ]);
 
       setBookings(bookingsRes.data);
@@ -70,7 +70,7 @@ const DriverDashboard = () => {
 
   const handleToggleAvailability = async () => {
     try {
-      await api.toggleAvailability(user.id, !isAvailable);
+      await toggleAvailability(user.id, !isAvailable);
       setIsAvailable(!isAvailable);
       toast.success(`You are now ${!isAvailable ? 'available' : 'unavailable'} for rides`);
     } catch (error) {
@@ -80,7 +80,7 @@ const DriverDashboard = () => {
 
   const handleAcceptBooking = async (bookingId) => {
     try {
-      await api.acceptBooking(bookingId);
+      await acceptBooking(bookingId);
       toast.success('Booking accepted successfully!');
       fetchDriverData();
     } catch (error) {
@@ -90,7 +90,7 @@ const DriverDashboard = () => {
 
   const handleStartTrip = async (bookingId) => {
     try {
-      await api.startTrip(bookingId);
+      await startTrip(bookingId);
       toast.success('Trip started!');
       fetchDriverData();
     } catch (error) {
@@ -100,7 +100,7 @@ const DriverDashboard = () => {
 
   const handleCompleteTrip = async (bookingId) => {
     try {
-      await api.completeTrip(bookingId);
+      await completeTrip(bookingId);
       toast.success('Trip completed successfully!');
       fetchDriverData();
     } catch (error) {

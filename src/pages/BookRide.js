@@ -37,7 +37,7 @@ import {
   CheckCircle,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
-import api from '../services/api';
+import {createBooking, getAvailableCabs} from '../services/api';
 import { toast } from 'react-toastify';
 
 const schema = yup.object().shape({
@@ -118,7 +118,7 @@ const BookRide = () => {
 
   const fetchAvailableCabs = async () => {
     try {
-      const response = await api.getAvailableCabs();
+      const response = await getAvailableCabs();
       setAvailableCabs(response.data);
     } catch (error) {
       console.error('Failed to fetch available cabs:', error);
@@ -155,7 +155,7 @@ const BookRide = () => {
         userId: user.id,
       };
 
-      const response = await api.createBooking(bookingData);
+      const response = await createBooking(bookingData);
       
       toast.success('Booking created successfully! Looking for a driver...');
       navigate('/dashboard');

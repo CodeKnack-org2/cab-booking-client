@@ -30,7 +30,7 @@ import {
   FilterList,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
-import api  from '../services/api';
+import {getUserBookings}  from '../services/api';
 
 const RideHistory = () => {
   const { user } = useAuth();
@@ -45,7 +45,7 @@ const RideHistory = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await api.getUserBookings();
+      const response = await getUserBookings();
       setBookings(response.data);
     } catch (err) {
       setError('Failed to load ride history');
