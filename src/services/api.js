@@ -52,8 +52,8 @@ export const userAPI = {
 // Booking API
 export const bookingAPI = {
   create: (bookingData) => api.post('/bookings', bookingData),
-  getUserBookings: () => api.get('/bookings/user'),
-  getDriverBookings: () => api.get('/bookings/driver'),
+  getUserBookings: () => api.get('/bookings/user').then(response => response.data),
+  getDriverBookings: () => api.get('/bookings/driver').then(response => response.data),
   acceptBooking: (bookingId) => api.post(`/bookings/${bookingId}/accept`),
   startTrip: (bookingId) => api.post(`/bookings/${bookingId}/start`),
   completeTrip: (bookingId) => api.post(`/bookings/${bookingId}/complete`),
@@ -71,7 +71,7 @@ export const cabAPI = {
 
 // Driver API
 export const driverAPI = {
-  toggleAvailability: (driverId, isAvailable) => 
+  toggleAvailability: (isAvailable, driverId) => 
     api.put(`/driver/availability/${driverId}`, { isAvailable }),
   getCurrentTrip: (driverId) => api.get(`/driver/current-trip/${driverId}`),
   getEarnings: (driverId) => api.get(`/driver/earnings/${driverId}`),
