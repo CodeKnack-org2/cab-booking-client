@@ -28,7 +28,7 @@ import {
   History,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
-import { bookingAPI } from '../services/api';
+import api from '../services/api';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   const fetchRecentBookings = async () => {
     try {
-      const response = await bookingAPI.getUserBookings();
+      const response = await api.getUserBookings();
       setRecentBookings(response.data.slice(0, 5)); // Get last 5 bookings
     } catch (err) {
       setError('Failed to load recent bookings');

@@ -34,8 +34,8 @@ import {
   Speed,
 } from '@mui/icons-material';
 import { useAuth } from '../../contexts/AuthContext';
-import { bookingAPI, driverAPI } from '../../services/api';
 import { toast } from 'react-toastify';
+import api from '../../services/api';
 
 const DriverDashboard = () => {
   const { user } = useAuth();
@@ -53,9 +53,9 @@ const DriverDashboard = () => {
   const fetchDriverData = async () => {
     try {
       const [bookingsRes, currentTripRes, earningsRes] = await Promise.all([
-        bookingAPI.getDriverBookings(),
-        driverAPI.getCurrentTrip(user.id),
-        driverAPI.getEarnings(user.id),
+        api.getDriverBookings(),
+        api.getCurrentTrip(user.id),
+        api.getEarnings(user.id),
       ]);
 
       setBookings(bookingsRes.data);
@@ -70,7 +70,7 @@ const DriverDashboard = () => {
 
   const handleToggleAvailability = async () => {
     try {
-      await driverAPI.toggleAvailability(user.id, !isAvailable);
+      await api.toggleAvailability(user.id, !isAvailable);
       setIsAvailable(!isAvailable);
       toast.success(`You are now ${!isAvailable ? 'available' : 'unavailable'} for rides`);
     } catch (error) {
@@ -80,7 +80,7 @@ const DriverDashboard = () => {
 
   const handleAcceptBooking = async (bookingId) => {
     try {
-      await bookingAPI.acceptBooking(bookingId);
+      await api.acceptBooking(bookingId);
       toast.success('Booking accepted successfully!');
       fetchDriverData();
     } catch (error) {
@@ -90,7 +90,7 @@ const DriverDashboard = () => {
 
   const handleStartTrip = async (bookingId) => {
     try {
-      await bookingAPI.startTrip(bookingId);
+      await api.startTrip(bookingId);
       toast.success('Trip started!');
       fetchDriverData();
     } catch (error) {
@@ -100,7 +100,7 @@ const DriverDashboard = () => {
 
   const handleCompleteTrip = async (bookingId) => {
     try {
-      await bookingAPI.completeTrip(bookingId);
+      await api.completeTrip(bookingId);
       toast.success('Trip completed successfully!');
       fetchDriverData();
     } catch (error) {
