@@ -62,7 +62,7 @@ export const getDriverCabs = (driverId) => api.get(`/cabs/driver/${driverId}`);
 export const updateCabStatus = (cabId, status) => api.put(`/cabs/${cabId}/status`, { status });
 
 // Driver API Functions
-export const toggleDriverAvailability = (driverId, isAvailable) => 
+export const toggleAvailability = (driverId, isAvailable) => 
   api.put(`/driver/availability/${driverId}`, { isAvailable });
 export const getCurrentTrip = (driverId) => api.get(`/driver/current-trip/${driverId}`);
 export const getDriverEarnings = (driverId) => api.get(`/driver/earnings/${driverId}`);
