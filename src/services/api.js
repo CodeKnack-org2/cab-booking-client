@@ -33,62 +33,48 @@ api.interceptors.response.use(
   }
 );
 
-// Auth API
-export const authAPI = {
-  login: (credentials) => api.post('/auth/login', credentials),
-  register: (userData) => api.post('/auth/register', userData),
-  getProfile: () => api.get('/auth/profile'),
-  verifyToken: () => api.post('/auth/verify'),
-  forgotPassword: (email) => api.post('/auth/forgot-password', { email }),
-};
+// Auth API Functions
+export const login = (credentials) => api.post('/auth/login', credentials);
+export const register = (userData) => api.post('/auth/register', userData);
+export const getProfile = () => api.get('/auth/profile');
+export const verifyToken = () => api.post('/auth/verify');
+export const forgotPassword = (email) => api.post('/auth/forgot-password', { email });
 
-// User API
-export const userAPI = {
-  getProfile: (userId) => api.get(`/user/profile/${userId}`),
-  updateProfile: (userId, data) => api.put(`/user/profile/${userId}`, data),
-  getRideHistory: (userId) => api.get(`/user/ride-history/${userId}`),
-};
+// User API Functions
+export const getUserProfile = (userId) => api.get(`/user/profile/${userId}`);
+export const updateUserProfile = (userId, data) => api.put(`/user/profile/${userId}`, data);
+export const getRideHistory = (userId) => api.get(`/user/ride-history/${userId}`);
 
-// Booking API
-export const bookingAPI = {
-  create: (bookingData) => api.post('/bookings', bookingData),
-  getUserBookings: () => api.get('/bookings/user'),
-  getDriverBookings: () => api.get('/bookings/driver'),
-  acceptBooking: (bookingId) => api.post(`/bookings/${bookingId}/accept`),
-  startTrip: (bookingId) => api.post(`/bookings/${bookingId}/start`),
-  completeTrip: (bookingId) => api.post(`/bookings/${bookingId}/complete`),
-  cancelBooking: (bookingId) => api.post(`/bookings/${bookingId}/cancel`),
-};
+// Booking API Functions
+export const createBooking = (bookingData) => api.post('/bookings', bookingData);
+export const getUserBookings = () => api.get('/bookings/user');
+export const getDriverBookings = () => api.get('/bookings/driver');
+export const acceptBooking = (bookingId) => api.post(`/bookings/${bookingId}/accept`);
+export const startTrip = (bookingId) => api.post(`/bookings/${bookingId}/start`);
+export const completeTrip = (bookingId) => api.post(`/bookings/${bookingId}/complete`);
+export const cancelBooking = (bookingId) => api.post(`/bookings/${bookingId}/cancel`);
 
-// Cab API
-export const cabAPI = {
-  create: (cabData) => api.post('/cabs', cabData),
-  getAvailableCabs: () => api.get('/cabs/available'),
-  getCabDetails: (cabId) => api.get(`/cabs/${cabId}`),
-  getDriverCabs: (driverId) => api.get(`/cabs/driver/${driverId}`),
-  updateStatus: (cabId, status) => api.put(`/cabs/${cabId}/status`, { status }),
-};
+// Cab API Functions
+export const createCab = (cabData) => api.post('/cabs', cabData);
+export const getAvailableCabs = () => api.get('/cabs/available');
+export const getCabDetails = (cabId) => api.get(`/cabs/${cabId}`);
+export const getDriverCabs = (driverId) => api.get(`/cabs/driver/${driverId}`);
+export const updateCabStatus = (cabId, status) => api.put(`/cabs/${cabId}/status`, { status });
 
-// Driver API
-export const driverAPI = {
-  toggleAvailability: (driverId, isAvailable) => 
-    api.put(`/driver/availability/${driverId}`, { isAvailable }),
-  getCurrentTrip: (driverId) => api.get(`/driver/current-trip/${driverId}`),
-  getEarnings: (driverId) => api.get(`/driver/earnings/${driverId}`),
-};
+// Driver API Functions
+export const toggleDriverAvailability = (driverId, isAvailable) => 
+  api.put(`/driver/availability/${driverId}`, { isAvailable });
+export const getCurrentTrip = (driverId) => api.get(`/driver/current-trip/${driverId}`);
+export const getDriverEarnings = (driverId) => api.get(`/driver/earnings/${driverId}`);
 
-// Payment API
-export const paymentAPI = {
-  createPayment: (paymentData) => api.post('/payments', paymentData),
-  getPaymentHistory: () => api.get('/payments'),
-  processPayment: (paymentId) => api.post(`/payments/${paymentId}/process`),
-};
+// Payment API Functions
+export const createPayment = (paymentData) => api.post('/payments', paymentData);
+export const getPaymentHistory = () => api.get('/payments');
+export const processPayment = (paymentId) => api.post(`/payments/${paymentId}/process`);
 
-// Notification API
-export const notificationAPI = {
-  getNotifications: () => api.get('/notifications'),
-  markAsRead: (notificationId) => api.put(`/notifications/${notificationId}/read`),
-  deleteNotification: (notificationId) => api.delete(`/notifications/${notificationId}`),
-};
+// Notification API Functions
+export const getNotifications = () => api.get('/notifications');
+export const markNotificationAsRead = (notificationId) => api.put(`/notifications/${notificationId}/read`);
+export const deleteNotification = (notificationId) => api.delete(`/notifications/${notificationId}`);
 
 export default api; 
