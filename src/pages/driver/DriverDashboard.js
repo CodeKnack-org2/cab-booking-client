@@ -55,7 +55,7 @@ const DriverDashboard = () => {
       const [bookingsRes, currentTripRes, earningsRes] = await Promise.all([
         api.getDriverBookings(),
         api.getCurrentTrip(user.id),
-        api.getEarnings(user.id),
+        api.getDriverEarnings(user.id),
       ]);
 
       setBookings(bookingsRes.data);

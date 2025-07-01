@@ -155,7 +155,7 @@ const BookRide = () => {
         userId: user.id,
       };
 
-      const response = await api.create(bookingData);
+      const response = await api.createBooking(bookingData);
       
       const booking = response.data;
       
