@@ -123,7 +123,7 @@ const DriverDashboard = () => {
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDateString = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
@@ -341,7 +341,7 @@ const DriverDashboard = () => {
                               <Box display="flex" alignItems="center" gap={1} mb={1}>
                                 <AccessTime sx={{ fontSize: 16 }} />
                                 <Typography variant="body2" color="text.secondary">
-                                  {formatDate(booking.createdAt)}
+                                  {formatDateString(booking.createdAt)}
                                 </Typography>
                               </Box>
                               <Box display="flex" alignItems="center" gap={1}>

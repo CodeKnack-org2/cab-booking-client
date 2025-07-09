@@ -24,7 +24,7 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar = () => {
-  const { user, isAuthenticated, logout, isDriver, isAdmin } = useAuth();
+  const { currentUser, isAuthenticated, logout, isDriver, isAdmin } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenuAnchor, setMobileMenuAnchor] = useState(null);
@@ -124,7 +124,7 @@ const Navbar = () => {
                 color="inherit"
               >
                 <Avatar sx={{ width: 32, height: 32, bgcolor: 'secondary.main' }}>
-                  {user?.name?.charAt(0) || <AccountCircle />}
+                  {currentUser?.name?.charAt(0) || <AccountCircle />}
                 </Avatar>
               </IconButton>
             </>
@@ -226,10 +226,10 @@ const Navbar = () => {
             <Dashboard sx={{ mr: 1 }} />
             Dashboard
           </MenuItem>
-          {user?.role && (
+          {currentUser?.role && (
             <MenuItem disabled>
               <Chip
-                label={user.role.toUpperCase()}
+                label={currentUser.role.toUpperCase()}
                 size="small"
                 color="primary"
                 variant="outlined"

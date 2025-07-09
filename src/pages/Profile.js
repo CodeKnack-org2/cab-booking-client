@@ -50,7 +50,7 @@ const schema = yup.object().shape({
 });
 
 const Profile = () => {
-  const { user, updateProfile } = useAuth();
+  const { currentUser, updateProfile } = useAuth();
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -67,9 +67,9 @@ const Profile = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: user?.name || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
+      name: currentUser?.name || '',
+      email: currentUser?.email || '',
+      phone: currentUser?.phone || '',
     },
   });
 
@@ -351,13 +351,13 @@ const Profile = () => {
                     mb: 2,
                   }}
                 >
-                  {user?.name?.charAt(0) || <Person />}
+                  {currentUser?.name?.charAt(0) || <Person />}
                 </Avatar>
                 <Typography variant="h6" gutterBottom>
-                  {user?.name}
+                  {currentUser?.name}
                 </Typography>
                 <Chip
-                  label={user?.role?.toUpperCase()}
+                  label={currentUser?.role?.toUpperCase()}
                   color="primary"
                   variant="outlined"
                   size="small"
@@ -375,7 +375,7 @@ const Profile = () => {
                     Member since
                   </Typography>
                   <Typography variant="body1">
-                    {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
+                    {currentUser?.createdAt ? new Date(currentUser.createdAt).toLocaleDateString() : 'N/A'}
                   </Typography>
                 </Box>
                 <Box mb={2}>

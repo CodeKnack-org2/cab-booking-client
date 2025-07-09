@@ -34,7 +34,17 @@ api.interceptors.response.use(
 );
 
 // Auth API Functions
-export const login = (credentials) => api.post('/auth/login', credentials);
+export const login = async (email, password, rememberMe) => {
+  try {
+    const response = await api.post('/auth/login', { email, password, rememberMe });
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const register = (userData) => api.post('/auth/register', userData);
 export const getProfile = () => api.get('/auth/profile');
 export const verifyToken = () => api.post('/auth/verify');
